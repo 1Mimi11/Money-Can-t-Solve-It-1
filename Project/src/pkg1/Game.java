@@ -1,7 +1,7 @@
 package pkg1;
 import java.util.Scanner;
 import java.util.Random;
-import java.util.function.Function;
+
 
 
 //Work on the system for calculating a trips total value
@@ -11,86 +11,37 @@ import java.util.function.Function;
 
 
 public class Game {
-	public static String fishingProcess() {
-		Scanner inputDevice = new Scanner(System.in);
-		Random random = new Random();
-		
-		//Fish and their Chances
-		String [] fish = {"Your line snapped!", "Cod", "Trout", "Salmon"};
-		double [] fishChance = {20.0, 45.0, 25.0, 10.0};
-				
-		System.out.println("Enter 'catch' to catch a fish.");
-		String choice = inputDevice.nextLine();
-				
-		//Fishing command that returns a string
-		double randomValue = random.nextDouble() * 100;
-		double catchChance = 0;
-		String caughtFish = null;
-		
-		if (choice.equals("catch")) {
-			for (int i = 0; i < fish.length; i++) {
-				catchChance += fishChance[i];
-				if (randomValue > fishChance [0] && randomValue < catchChance) {
-					caughtFish = fish[i];
-					System.out.println("You caught a " + caughtFish + "!");
-					break;
-					} else if (randomValue < fishChance [0]) {
-						System.out.println("Your line snapped!");
-						break;
-						}
-					} 
-					if (caughtFish == null && randomValue >= fishChance [0]) {
-						System.out.println("No fish took the bait. :<");
-						}
-					}else{
-						System.out.println("Throw your line to catch fish you can sell to the vendor!");
-						}
-		return caughtFish;
-				}
-			
-			
-			
-			public static void main(String[] args) {
-				//The bags and the counter to know when it's filled
-				String[] bag = new String [5];
-				int bagIndex = 0;
+	
+	public static String [] bag = new String [5];
+	public static int bagIndex =0;
+	
+	public static void main(String[] args) {
+				int answer;
 				Scanner inputDevice = new Scanner(System.in);
-				String choice;
-
 				
-				while(true) {
-					String caughtFish = fishingProcess();
-					
-					//Saving fish too backpack
-					if (caughtFish != null && caughtFish != "Your line snapped") {
-						if (bagIndex < bag.length) {
-							bag[bagIndex] = caughtFish;
-							bagIndex++;
-						System.out.println("Saved " + caughtFish + " to backpack");
-						} else {
-							System.out.println("Your bag is full, sell to the vendor to make space.");
-						}
-					}
-					
-					//Fishing Loop
-				System.out.println("Continue fishing? 'YES' or 'NO'.");
-				choice = inputDevice.nextLine();
-				if (choice.equals("YES")) {
-					String cauhtFish = fishingProcess();
-					if (caughtFish != null && caughtFish != "Your line snapped") {
-						if (bagIndex < bag.length) {
-							bag[bagIndex] = caughtFish;
-							bagIndex++;
-						System.out.println("Saved " + caughtFish + " to backpack");
-						} else {
-							System.out.println("Your bag is full, sell to the vendor to make space.");
-						}
-					}
-					
-				} else if (choice.equals("NO")) {
-					System.out.print("Done fishing!");
+				while (true) {
+					System.out.print("~~~ Money Can't Solve It ~~~\n");
+				System.out.println("\nDo you want to visit the vendor[1] or go fish[2]?");
+				answer = inputDevice.nextInt();
+				inputDevice.nextLine();
+			
+				
+				
+				switch(answer) {
+				case 1:
+					methods.vendor();
+					break;
+				case 2:
+					methods.fishingLoop();
+					break;
+				case 3:
+					System.out.println("Game quited.");
+					return;
+				default:
+					System.out.println("Error, please reload the program and choose from one of the given options.");
 					break;
 				}
-				}
-			}		
+				
 			}
+		}		
+	}
