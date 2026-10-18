@@ -6,10 +6,11 @@ import java.util.function.Function;
 
 //Work on the system for calculating a trips total value
 //Create a fish vendor to sell to
-//Make the fishing command loop
+//Make a backpack system
+//Make set values for all the fish in the game
 
 public class Game {
-	public static void fishingProcess() {
+	public static String fishingProcess() {
 		Scanner inputDevice = new Scanner(System.in);
 		Random random = new Random();
 		
@@ -43,16 +44,20 @@ public class Game {
 					}else{
 						System.out.println("Throw your line to catch fish you can sell to the vendor!");
 						}
+		return caughtFish;
 				}
 			
 			
 			
 			public static void main(String[] args) {
+				//The bags and the counter to know when it's filled
+				String[] bag = new String [5];
 				Scanner inputDevice = new Scanner(System.in);
 				String choice;
 				fishingProcess();
 				
 				while(true) {
+					String caughtFish = fishingProcess();
 				System.out.println("Continue fishing? 'YES' or 'NO'.");
 				choice = inputDevice.nextLine();
 				if (choice.equals("YES")) {
