@@ -8,7 +8,7 @@ import java.util.function.Function;
 //Create a fish vendor to sell to
 //Make a backpack system
 //Make set values for all the fish in the game
-//test
+
 
 public class Game {
 	public static String fishingProcess() {
