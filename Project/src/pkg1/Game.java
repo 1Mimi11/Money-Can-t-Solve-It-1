@@ -52,16 +52,40 @@ public class Game {
 			public static void main(String[] args) {
 				//The bags and the counter to know when it's filled
 				String[] bag = new String [5];
+				int bagIndex = 0;
 				Scanner inputDevice = new Scanner(System.in);
 				String choice;
-				fishingProcess();
+
 				
 				while(true) {
 					String caughtFish = fishingProcess();
+					
+					//Saving fish too backpack
+					if (caughtFish != null && caughtFish != "Your line snapped") {
+						if (bagIndex < bag.length) {
+							bag[bagIndex] = caughtFish;
+							bagIndex++;
+						System.out.println("Saved " + caughtFish + " to backpack");
+						} else {
+							System.out.println("Your bag is full, sell to the vendor to make space.");
+						}
+					}
+					
+					//Fishing Loop
 				System.out.println("Continue fishing? 'YES' or 'NO'.");
 				choice = inputDevice.nextLine();
 				if (choice.equals("YES")) {
-					fishingProcess();
+					String cauhtFish = fishingProcess();
+					if (caughtFish != null && caughtFish != "Your line snapped") {
+						if (bagIndex < bag.length) {
+							bag[bagIndex] = caughtFish;
+							bagIndex++;
+						System.out.println("Saved " + caughtFish + " to backpack");
+						} else {
+							System.out.println("Your bag is full, sell to the vendor to make space.");
+						}
+					}
+					
 				} else if (choice.equals("NO")) {
 					System.out.print("Done fishing!");
 					break;
