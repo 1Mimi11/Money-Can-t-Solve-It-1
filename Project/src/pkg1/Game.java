@@ -31,7 +31,7 @@ public class Game {
 			System.out.println("\nDo you want to visit the vendor[1] or go fish[2]?");
 			answer = inputDevice.nextInt();
 			inputDevice.nextLine();
-			 
+			
 				
 				
 			switch(answer) {
