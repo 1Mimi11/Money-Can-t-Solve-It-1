@@ -44,7 +44,7 @@ public class methods {
 		return caughtFish;
 				}
 	
-	
+	 
 	
 	public static String fishingLoop() {
 		//The bags and the counter to know when it's filled
