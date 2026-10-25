@@ -12,6 +12,13 @@ import java.util.Random;
 
 public class Game {
 	
+	public static Fish[] fishTypes = {
+			new Fish("Cod", 2),
+			new Fish("Trout", 7),
+			new Fish("Salmon", 35)
+
+	};
+	
 	public static String [] bag = new String [5];
 	public static int bagIndex = 0;
 	

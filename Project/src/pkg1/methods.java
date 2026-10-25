@@ -19,6 +19,7 @@ public class methods {
 		//Fishing command that returns a string
 		double randomValue = random.nextDouble() * 100;
 		double catchChance = 0;
+		Fish caughtFishs;
 		String caughtFish = null;
 		
 		if (choice.equals("catch")) {
@@ -26,6 +27,7 @@ public class methods {
 				catchChance += fishChance[i];
 				if (randomValue > fishChance [0] && randomValue < catchChance) {
 					caughtFish = fish[i];
+					
 					System.out.println("You caught a " + caughtFish + "!");
 					break;
 					} else if (randomValue < fishChance [0]) {
@@ -63,7 +65,7 @@ public class methods {
 					bag[bagIndex] = caughtFish;
 					bagIndex++;
 				System.out.println("Saved " + caughtFish + " to backpack\n");
-				
+				System.out.println("You have " + bagIndex + " fish out of " + bag.length + " fish in your backpack.");
 				//Add fish in to caughtFish.
 				if (fish) {
 					allFish.append(caughtFish);
