@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.util.Random;
 
 
-
 //Work on the system for calculating a trips total value
 //Create a fish vendor to sell to
 //Make a backpack system
@@ -11,15 +10,13 @@ import java.util.Random;
 
 
 public class Game {
-	
 	public static Fish[] fishTypes = {
 			new Fish("Cod", 2),
 			new Fish("Trout", 7),
 			new Fish("Salmon", 35)
 
 	};
-	
-	public static String [] bag = new String [5];
+	public static Fish[] bag = new Fish [5];
 	public static int bagIndex = 0;
 	
 	public static void main(String[] args) {
@@ -39,17 +36,7 @@ public class Game {
 					methods.vendor(inputDevice);
 					break;
 				case 2:
-					String allFish = methods.fishingLoop();
-					if (allFish != null && allFish != "Your line snapped") {
-						String[] fishArray = allFish.split(", ");
-						for (String fish : fishArray) {
-						if (bagIndex < bag.length) {
-							bag[bagIndex] = fish;
-							bagIndex++;
-							System.out.println(fish + " has been added to your bag.");
-							}
-						}
-					}	
+					methods.fishingLoop(inputDevice);
 					break;
 				case 3:
 					System.out.println("You've quit the game.");

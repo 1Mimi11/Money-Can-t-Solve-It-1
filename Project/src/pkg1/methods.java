@@ -4,76 +4,68 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class methods {
-	String caughtFish;
-	public static String fishingProcess(Scanner inputDevice) {
-		
-		Random random = new Random();
-		
+	public static Random random = new Random();
+	
+	//String caughtFish;
+	public static Fish fishingProcess(Scanner inputDevice, Random random) {
+
 		//Fish and their Chances
-		String [] fish = {"Your line snapped!", "Cod", "Trout", "Salmon"};
+		String [] fishNames = {"Your line snapped!", "Cod", "Trout", "Salmon"};
 		double [] fishChance = {20.0, 45.0, 25.0, 10.0};
-				
-		//System.out.println("Enter 'catch' to catch a fish or 'exit' to stop fishing.");
+		
 		String choice = inputDevice.nextLine();
-				
-		//Fishing command that returns a string
 		double randomValue = random.nextDouble() * 100;
 		double catchChance = 0;
-		Fish caughtFishs;
-		String caughtFish = null;
+		String caughtFishName = null;
 		
 		if (choice.equals("catch")) {
-			for (int i = 0; i < fish.length; i++) {
+			for (int i = 0; i < fishNames.length; i++) {
 				catchChance += fishChance[i];
-				if (randomValue > fishChance [0] && randomValue < catchChance) {
-					caughtFish = fish[i];
-					
-					System.out.println("You caught a " + caughtFish + "!");
-					break;
-					} else if (randomValue < fishChance [0]) {
+				if (i == 0) {
+					//Line snapped, no fish
+					if (randomValue < fishChance [i]) {
 						System.out.println("Your line snapped!");
-						break;
+						return null;
 						}
-					} 
-					if (caughtFish == null && randomValue >= fishChance [0]) {
-						System.out.println("No fish took the bait. :<");
+					
+					}else {
+						if (randomValue >= catchChance - fishChance[i] && randomValue < catchChance) {
+							caughtFishName = fishNames[i];
+							System.out.println("You caught a " + caughtFishName + "!");
+							for (Fish f : Game.fishTypes) {
+								if (f.name.equals(caughtFishName)) {
+									return f;
+								}
+							}
 						}
-					}else{
-						System.out.println("Throw your line to catch fish you can sell to the vendor!");
-						}
-		return caughtFish;
+					}
 				}
-	
+				if (caughtFishName == null) {
+					System.out.println("No fish took the bait. :<");
+					return null;
+					}
+				} else {
+					System.out.println("Throw your line to catch fish, that you can sell to the vendor!");
+					return null;
+				}
+		return null;
+	}
+
 	 
 	 
-	public static String fishingLoop() {
-		//The bags and the counter to know when it's filled
-		String[] bag = new String [5];
-		int bagIndex = 0;
-		Scanner inputDevice = new Scanner(System.in);
-		String choice;
-		StringBuilder allFish = new StringBuilder();
-		boolean fish = true;
+	public static void fishingLoop(Scanner inputDevice) {
 		System.out.println("Enter 'catch' to catch a fish or 'exit' to stop fishing.");
 		
 		while(true) {
-			String caughtFish = methods.fishingProcess(inputDevice);
+		Fish caughtFish = fishingProcess(inputDevice, methods.random);
 			
-			//Saving fish too backpack
-			if (caughtFish != null && !caughtFish.equals("Your line snapped") && !caughtFish.equals("No fish took the bait. :<")) {
-				if (bagIndex < bag.length) {
-					bag[bagIndex] = caughtFish;
-					bagIndex++;
-				System.out.println("Saved " + caughtFish + " to backpack\n");
-				System.out.println("You have " + bagIndex + " fish out of " + bag.length + " fish in your backpack.");
-				//Add fish in to caughtFish.
-				if (fish) {
-					allFish.append(caughtFish);
-					fish = false;				
-				}else {
-					allFish.append(", ").append(caughtFish);
-				}
-				
+		//Saving fish too backpack
+			if (caughtFish != null) {
+				if (Game.bagIndex < Game.bag.length) {
+					Game.bag[Game.bagIndex] = caughtFish;
+					Game.bagIndex++;
+					System.out.println("A \"" + caughtFish + "\" has been added to your bag.");
+					System.out.println("You have " + Game.bagIndex + " fish out of " + Game.bag.length + " fish in your backpack.");		
 				} else {
 					System.out.println("Your bag is full, sell to the vendor to make space.");
 				}
@@ -81,16 +73,12 @@ public class methods {
 			
 			//Fishing Loop
 		System.out.println("\nAre you done fishing? Hit the enter key, then type 'catch' to keep fishing or type 'exit' to stop fishing.\n");
-		choice = inputDevice.nextLine();
-		
+		String choice = inputDevice.nextLine();
 		if (choice.equals("exit")) {
 			System.out.print("Done fishing!\n\n");
-			return allFish.toString();
-			
+			break;
+			}
 		}
-		}
-		
-
 	}
 	
 	
@@ -103,11 +91,16 @@ public class methods {
 		
 		System.out.print("Fish Vendor: Hello, I'm Pete! Would you like to sell your fish to me? \nSell fish.[1] \nAsk about the game.[2] \nLeave the vendor.[3]\n");
 		int choice = inputDevice.nextInt();
+		inputDevice.nextLine();
 		
 		if(choice == 1) {
 			System.out.println("You have " + Game.bagIndex + " fish in your bag.");
 			if (Game.bagIndex > 0) {
-				System.out.println("\nYou sold your fish to me!\n");
+				double totalValue = 0;
+				for (int i = 0; i < Game.bagIndex; i++) {
+					totalValue += Game.bag[i].price;
+				}
+				System.out.println("\nYou sold your fish for $" + totalValue + "!\n");
 				Game.bagIndex = 0;
 				break;
 			} else if (Game.bagIndex == 0) {
@@ -123,7 +116,7 @@ public class methods {
 				System.out.println("\nThanks for visiting!\n");
 				leaving = true;
 		}else{
-			System.out.print("\nlease a command from the given list.\n");
+			System.out.print("\nPlease choose a command from the given list.\n");
 		}
 		
 
