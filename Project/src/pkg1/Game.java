@@ -47,7 +47,6 @@ public class Game {
 							bag[bagIndex] = fish;
 							bagIndex++;
 							System.out.println(fish + " has been added to your bag.");
-						//I don't think this code is correctly updating the index, bag is stuck at 1.
 							}
 						}
 					}	
