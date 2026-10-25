@@ -53,7 +53,7 @@ public class methods {
 
 	 
 	 
-	public static void fishingLoop(Scanner inputDevice) {
+	public static void fishingLoop(Reggie player, Scanner inputDevice) {
 		System.out.println("Enter 'catch' to catch a fish or 'exit' to stop fishing.");
 		
 		while(true) {
@@ -75,7 +75,7 @@ public class methods {
 		System.out.println("\nAre you done fishing? Hit the enter key, then type 'catch' to keep fishing or type 'exit' to stop fishing.\n");
 		String choice = inputDevice.nextLine();
 		if (choice.equals("exit")) {
-			System.out.print("Done fishing!\n\n");
+			System.out.print("Done fishing!\n\n\n");
 			break;
 			}
 		}
@@ -83,13 +83,13 @@ public class methods {
 	
 	
 	
-	public static void vendor(Scanner inputDevice){
+	public static void vendor(Reggie player, Scanner inputDevice){
 		
 		boolean leaving = false;
 		
 		while (!leaving) {
 		
-		System.out.print("Fish Vendor: Hello, I'm Pete! Would you like to sell your fish to me? \nSell fish.[1] \nAsk about the game.[2] \nLeave the vendor.[3]\n");
+		System.out.print("\nFish Vendor: Hello, I'm Pete! Would you like to sell your fish to me? \nSell fish.[1] \nAsk about the game.[2] \nLeave the vendor.[3]\n\n");
 		int choice = inputDevice.nextInt();
 		inputDevice.nextLine();
 		
@@ -100,9 +100,9 @@ public class methods {
 				for (int i = 0; i < Game.bagIndex; i++) {
 					totalValue += Game.bag[i].price;
 				}
+				player.addMoney(totalValue);
 				System.out.println("\nYou sold your fish for $" + totalValue + "!\n");
 				Game.bagIndex = 0;
-				break;
 			} else if (Game.bagIndex == 0) {
 				System.out.println("Your bag is empty.");
 			}else {
@@ -113,7 +113,7 @@ public class methods {
 		}else if (choice == 2) {
 			System.out.println("\nThis is a fishing game where you can fish and sell fish for upgrades.\n");
 		}else if (choice == 3) {
-				System.out.println("\nThanks for visiting!\n");
+				System.out.println("\nThanks for visiting!\n\n");
 				leaving = true;
 		}else{
 			System.out.print("\nPlease choose a command from the given list.\n");
