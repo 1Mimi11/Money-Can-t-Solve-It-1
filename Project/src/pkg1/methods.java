@@ -4,8 +4,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class methods {
-	public static String fishingProcess() {
-		Scanner inputDevice = new Scanner(System.in);
+	String caughtFish;
+	public static String fishingProcess(Scanner inputDevice) {
+		
 		Random random = new Random();
 		
 		//Fish and their Chances
@@ -43,23 +44,34 @@ public class methods {
 	
 	
 	
-	public static void fishingLoop() {
+	public static String fishingLoop() {
 		//The bags and the counter to know when it's filled
 		String[] bag = new String [5];
 		int bagIndex = 0;
 		Scanner inputDevice = new Scanner(System.in);
 		String choice;
+		StringBuilder allFish = new StringBuilder();
+		boolean fish = true;
 		System.out.println("Enter 'catch' to catch a fish or 'exit' to stop fishing.");
 		
 		while(true) {
-			String caughtFish = methods.fishingProcess();
+			String caughtFish = methods.fishingProcess(inputDevice);
 			
 			//Saving fish too backpack
-			if (caughtFish != null && caughtFish != "Your line snapped") {
+			if (caughtFish != null && !caughtFish.equals("Your line snapped") && !caughtFish.equals("No fish took the bait. :<")) {
 				if (bagIndex < bag.length) {
 					bag[bagIndex] = caughtFish;
 					bagIndex++;
 				System.out.println("Saved " + caughtFish + " to backpack\n");
+				
+				//Add fish in to caughtFish.
+				if (fish) {
+					allFish.append(caughtFish);
+					fish = false;				
+				}else {
+					allFish.append(", ").append(caughtFish);
+				}
+				
 				} else {
 					System.out.println("Your bag is full, sell to the vendor to make space.");
 				}
@@ -71,7 +83,8 @@ public class methods {
 		
 		if (choice.equals("exit")) {
 			System.out.print("Done fishing!\n\n");
-			break;
+			return allFish.toString();
+			
 		}
 		}
 		
@@ -80,8 +93,8 @@ public class methods {
 	
 	
 	
-	public static void vendor(){
-		Scanner inputDevice = new Scanner(System.in);
+	public static void vendor(Scanner inputDevice){
+		
 		boolean leaving = false;
 		
 		while (!leaving) {
@@ -90,7 +103,16 @@ public class methods {
 		int choice = inputDevice.nextInt();
 		
 		if(choice == 1) {
-			System.out.println("\nYou sold your fish to me!\n");
+			System.out.println("You have " + Game.bagIndex + " fish in your bag.");
+			if (Game.bagIndex > 0) {
+				System.out.println("\nYou sold your fish to me!\n");
+				Game.bagIndex = 0;
+				break;
+			} else if (Game.bagIndex == 0) {
+				System.out.println("Your bag is empty.");
+			}else {
+				System.out.println("Error.");
+			}
 
 
 		}else if (choice == 2) {

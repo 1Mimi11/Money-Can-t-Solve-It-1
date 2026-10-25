@@ -13,29 +13,40 @@ import java.util.Random;
 public class Game {
 	
 	public static String [] bag = new String [5];
-	public static int bagIndex =0;
+	public static int bagIndex = 0;
 	
 	public static void main(String[] args) {
-				int answer;
-				Scanner inputDevice = new Scanner(System.in);
+		int answer;
+		Scanner inputDevice = new Scanner(System.in);
 				
-				while (true) {
-					System.out.print("~~~ Money Can't Solve It ~~~\n");
-				System.out.println("\nDo you want to visit the vendor[1] or go fish[2]?");
-				answer = inputDevice.nextInt();
-				inputDevice.nextLine();
+		while (true) {
+			System.out.print("~~~ Money Can't Solve It ~~~\n");
+			System.out.println("\nDo you want to visit the vendor[1] or go fish[2]?");
+			answer = inputDevice.nextInt();
+			inputDevice.nextLine();
 			
 				
 				
-				switch(answer) {
+			switch(answer) {
 				case 1:
-					methods.vendor();
+					methods.vendor(inputDevice);
 					break;
 				case 2:
-					methods.fishingLoop();
+					String allFish = methods.fishingLoop();
+					if (allFish != null && allFish != "Your line snapped") {
+						String[] fishArray = allFish.split(", ");
+						for (String fish : fishArray) {
+						if (bagIndex < bag.length) {
+							bag[bagIndex] = fish;
+							bagIndex++;
+							System.out.println(fish + " has been added to your bag.");
+						//I don't think this code is correctly updating the index, bag is stuck at 1.
+							}
+						}
+					}	
 					break;
 				case 3:
-					System.out.println("Game quited.");
+					System.out.println("You've quit the game.");
 					return;
 				default:
 					System.out.println("Error, please reload the program and choose from one of the given options.");
