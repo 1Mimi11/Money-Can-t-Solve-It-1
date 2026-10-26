@@ -13,5 +13,5 @@ public class Fish {
 	@Override
 	public String toString() {
 		return name;
-	}
+	} 
 }

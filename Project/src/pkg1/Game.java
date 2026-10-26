@@ -32,7 +32,7 @@ public class Game {
 			System.out.print("\nDo you want to visit the vendor[1], go fish[2], or check your stats[3]?\nEnter choice: ");
 			int answer = inputDevice.nextInt();
 			inputDevice.nextLine();
-			
+			 
 				
 				
 			switch(answer) {

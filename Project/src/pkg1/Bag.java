@@ -9,6 +9,6 @@ public Bag(String name, int capacity, double price) {
 	this.name = name;
 	this.capacity = capacity;
 	this.price = price;
-	}
+	} 
 
 }

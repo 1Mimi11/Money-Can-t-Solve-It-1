@@ -114,7 +114,7 @@ public class methods {
 				System.out.println("Your bag is empty.");
 			}else {
 				System.out.println("Error.");
-			}
+			} 
 		}else if(choice == 2){
 			for (int i = 0; i < rodsForSale.length; i++) {
 				System.out.println((i+1) + ". " + rodsForSale[i].name + " - $" + rodsForSale[i].price);

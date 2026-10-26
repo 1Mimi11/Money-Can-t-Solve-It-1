@@ -9,3 +9,4 @@ public Rod(String name, double price) {
 	this.price = price;
 	}
 }
+ 

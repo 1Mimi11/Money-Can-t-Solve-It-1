@@ -14,7 +14,7 @@ public Reggie() {
 // Add money method
 public void addMoney(double amount) {
 	this.money += amount;
-}
+} 
 
 // Player stats method
 public void playerStats() {
