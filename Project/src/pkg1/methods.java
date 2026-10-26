@@ -54,7 +54,7 @@ public class methods {
 	 
 	 
 	public static void fishingLoop(Reggie player, Scanner inputDevice) {
-		System.out.println("Enter 'catch' to catch a fish or 'exit' to stop fishing.");
+		System.out.println("\n\nEnter 'catch' to catch a fish or 'exit' to stop fishing.");
 		
 		while(true) {
 		Fish caughtFish = fishingProcess(inputDevice, methods.random);
@@ -84,12 +84,19 @@ public class methods {
 	
 	
 	public static void vendor(Reggie player, Scanner inputDevice){
-		
+		Rod[] rodsForSale = {
+				new Rod("Reinforced Wood Rod", 25.0),
+				new Rod("Iron Rod", 135.0)
+		};
+		Bag[] bagsForSale = {
+				new Bag("Basic Bag", 15, 20.0),
+				new Bag("Small Bag", 30, 65.0)
+		};
 		boolean leaving = false;
 		
 		while (!leaving) {
 		
-		System.out.print("\nFish Vendor: Hello, I'm Pete! Would you like to sell your fish to me? \nSell fish.[1] \nAsk about the game.[2] \nLeave the vendor.[3]\n\n");
+		System.out.print("\nFish Vendor: Hello, I'm Pete! Would you like to sell your fish to me? \nSell fish.[1] \nBuy a new fishing rod.[2] \nBuy a new bag.[3] \nAsk about the game.[4] \nLeave the vendor.[5]\n\n");
 		int choice = inputDevice.nextInt();
 		inputDevice.nextLine();
 		
@@ -108,11 +115,19 @@ public class methods {
 			}else {
 				System.out.println("Error.");
 			}
-
-
-		}else if (choice == 2) {
+		}else if(choice == 2){
+			for (int i = 0; i < rodsForSale.length; i++) {
+				System.out.println((i+1) + ". " + rodsForSale[i].name + " - $" + rodsForSale[i].price);
+				System.out.println("Which rod would you like to buy?");
+				String answer = inputDevice.nextLine();
+			}
+		}else if(choice == 3){
+			for (int i = 0; i < bagsForSale.length; i++) {
+				System.out.println((i+1) + ". " + rodsForSale[1].name + " - $" + bagsForSale[i].price);
+			};
+		}else if (choice == 4) {
 			System.out.println("\nThis is a fishing game where you can fish and sell fish for upgrades.\n");
-		}else if (choice == 3) {
+		}else if (choice == 5) {
 				System.out.println("\nThanks for visiting!\n\n");
 				leaving = true;
 		}else{

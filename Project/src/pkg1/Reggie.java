@@ -2,13 +2,13 @@ package pkg1;
 
 public class Reggie {
 public double money;
-public String rodType;
-public String bagType;
+public Rod rodType;
+public Bag bagType;
 
 public Reggie() {
 	this.money = 0.0;
-	this.rodType = "Basic Rod";
-	this.bagType = "Tiny Bag";
+	this.rodType = new Rod ("Basic Rod", 0.0);
+	this.bagType = new Bag("Tiny Bag", 5, 0.0);
 }
 
 // Add money method
@@ -20,8 +20,8 @@ public void addMoney(double amount) {
 public void playerStats() {
 	System.out.println("\nPlayer Stats:");
 	System.out.println("Money: $" + money);
-	System.out.println("Fishing Rod: " + rodType);
-	System.out.println("Bag Type: " + bagType + "\n\n");
+	System.out.println("Fishing Rod: " + rodType.name);
+	System.out.println("Bag Type: " + bagType.name + ", capacity: " + bagType.capacity + "\n\n");
 }
 	
 }

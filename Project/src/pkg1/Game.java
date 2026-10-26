@@ -3,10 +3,8 @@ import java.util.Scanner;
 import java.util.Random;
 
 
-//Work on the system for calculating a trips total value
-//Create a fish vendor to sell to
-//Make a backpack system
-//Make set values for all the fish in the game
+/*Create upgrades for the fishing rod and
+backpack that the player can buy.*/
 
 
 public class Game {
@@ -17,7 +15,7 @@ public class Game {
 	//Create Fish Types
 	public static Fish[] fishTypes = {
 			new Fish("Cod", 2),
-			new Fish("Trout", 7),
+			new Fish("Trou/paget", 7),
 			new Fish("Salmon", 35)
 	};
 	
